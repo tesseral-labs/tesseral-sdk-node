@@ -123,8 +123,8 @@ const ACCESS_TOKEN_TEST_CASES = [
 
 describe("authenticate", () => {
     for (const testCase of ACCESS_TOKEN_TEST_CASES) {
-        it(testCase.name, () => {
-            const { jwks } = __exportedForTests.parseConfig(JSON.parse(testCase.jwks));
+        it(testCase.name, async () => {
+            const { jwks } = await __exportedForTests.parseConfig(JSON.parse(testCase.jwks));
 
             if (testCase.claims) {
                 expect(
@@ -132,7 +132,7 @@ describe("authenticate", () => {
                         jwks,
                         accessToken: testCase.accessToken,
                         nowUnixSeconds: testCase.nowUnixSeconds,
-                    })
+                    }),
                 ).toEqual(testCase.claims);
             } else {
                 expect(() =>
@@ -140,7 +140,7 @@ describe("authenticate", () => {
                         jwks,
                         accessToken: testCase.accessToken,
                         nowUnixSeconds: testCase.nowUnixSeconds,
-                    })
+                    }),
                 ).toThrow();
             }
         });
