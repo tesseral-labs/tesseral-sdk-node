@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface UpdateOrganizationMicrosoftTenantIDsResponse {
+    /** The updated Microsoft Tenant IDs for the Organization. */
     organizationMicrosoftTenantIds?: Tesseral.OrganizationMicrosoftTenantIDs;
 }

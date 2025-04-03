@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface GetOrganizationResponse {
+    /** The requested Organization. */
     organization?: Tesseral.Organization;
 }

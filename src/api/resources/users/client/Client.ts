@@ -30,6 +30,8 @@ export class Users {
     constructor(protected readonly _options: Users.Options = {}) {}
 
     /**
+     * List Users.
+     *
      * @param {Tesseral.UsersListUsersRequest} request
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -65,8 +67,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -153,6 +155,8 @@ export class Users {
     }
 
     /**
+     * Create a User.
+     *
      * @param {Tesseral.User} request
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -178,8 +182,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +270,9 @@ export class Users {
     }
 
     /**
-     * @param {string} id
+     * Get a User.
+     *
+     * @param {string} id - The User ID.
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -288,8 +294,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -375,7 +381,9 @@ export class Users {
     }
 
     /**
-     * @param {string} id
+     * Delete a User.
+     *
+     * @param {string} id - The User ID.
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -397,8 +405,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -484,7 +492,9 @@ export class Users {
     }
 
     /**
-     * @param {string} id
+     * Update a User.
+     *
+     * @param {string} id - The User ID.
      * @param {Tesseral.User} request
      * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -511,8 +521,8 @@ export class Users {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

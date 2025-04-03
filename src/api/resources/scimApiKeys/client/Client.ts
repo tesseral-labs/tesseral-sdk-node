@@ -30,6 +30,8 @@ export class ScimApiKeys {
     constructor(protected readonly _options: ScimApiKeys.Options = {}) {}
 
     /**
+     * List SCIM API Keys.
+     *
      * @param {Tesseral.ScimApiKeysListScimapiKeysRequest} request
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -65,8 +67,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -153,6 +155,8 @@ export class ScimApiKeys {
     }
 
     /**
+     * Create a SCIM API Key.
+     *
      * @param {Tesseral.ScimapiKey} request
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -178,8 +182,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +270,9 @@ export class ScimApiKeys {
     }
 
     /**
-     * @param {string} id
+     * Get a SCIM API Key.
+     *
+     * @param {string} id - The SCIM API Key ID.
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -291,8 +297,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -378,7 +384,9 @@ export class ScimApiKeys {
     }
 
     /**
-     * @param {string} id
+     * Delete a SCIM API Key.
+     *
+     * @param {string} id - The SCIM API Key ID.
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -403,8 +411,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -490,7 +498,9 @@ export class ScimApiKeys {
     }
 
     /**
-     * @param {string} id
+     * Update a SCIM API Key.
+     *
+     * @param {string} id - The SCIM API Key ID.
      * @param {Tesseral.ScimapiKey} request
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -517,8 +527,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -605,7 +615,9 @@ export class ScimApiKeys {
     }
 
     /**
-     * @param {string} id
+     * Revoke a SCIM API Key.
+     *
+     * @param {string} id - The SCIM API Key ID.
      * @param {ScimApiKeys.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -630,8 +642,8 @@ export class ScimApiKeys {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

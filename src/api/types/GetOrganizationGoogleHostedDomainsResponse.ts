@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface GetOrganizationGoogleHostedDomainsResponse {
+    /** The Organization's Google Hosted Domains. */
     organizationGoogleHostedDomains?: Tesseral.OrganizationGoogleHostedDomains;
 }

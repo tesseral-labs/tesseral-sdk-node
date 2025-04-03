@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface GetProjectResponse {
+    /** The requested Project. */
     project?: Tesseral.Project;
 }

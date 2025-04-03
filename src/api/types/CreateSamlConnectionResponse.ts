@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface CreateSamlConnectionResponse {
+    /** The created SAML Connection. */
     samlConnection?: Tesseral.SamlConnection;
 }

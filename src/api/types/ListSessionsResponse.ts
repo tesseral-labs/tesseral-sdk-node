@@ -5,6 +5,8 @@
 import * as Tesseral from "../index";
 
 export interface ListSessionsResponse {
+    /** A list of Sessions. */
     sessions?: Tesseral.Session[];
+    /** The pagination token for the next page of results. Empty if there is no next page. */
     nextPageToken?: string;
 }

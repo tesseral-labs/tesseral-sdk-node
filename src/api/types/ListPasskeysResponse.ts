@@ -5,6 +5,8 @@
 import * as Tesseral from "../index";
 
 export interface ListPasskeysResponse {
+    /** A list of Passkeys. */
     passkeys?: Tesseral.Passkey[];
+    /** The pagination token for the next page of results. Empty if there is no next page. */
     nextPageToken?: string;
 }

@@ -7,6 +7,12 @@
  *     {}
  */
 export interface PasskeysListPasskeysRequest {
+    /**
+     * The ID of the User.
+     */
     userId?: string;
+    /**
+     * A pagination token. Leave empty to get the first page of results.
+     */
     pageToken?: string;
 }

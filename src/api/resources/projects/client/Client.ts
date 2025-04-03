@@ -30,6 +30,8 @@ export class Projects {
     constructor(protected readonly _options: Projects.Options = {}) {}
 
     /**
+     * Get the current project.
+     *
      * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -51,8 +53,8 @@ export class Projects {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

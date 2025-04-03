@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface CreateUserResponse {
+    /** The created User. */
     user?: Tesseral.User;
 }

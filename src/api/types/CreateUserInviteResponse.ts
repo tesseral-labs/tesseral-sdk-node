@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface CreateUserInviteResponse {
+    /** The created User Invite. */
     userInvite?: Tesseral.UserInvite;
 }

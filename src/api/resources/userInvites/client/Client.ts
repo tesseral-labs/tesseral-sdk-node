@@ -30,6 +30,8 @@ export class UserInvites {
     constructor(protected readonly _options: UserInvites.Options = {}) {}
 
     /**
+     * List User Invites.
+     *
      * @param {Tesseral.UserInvitesListUserInvitesRequest} request
      * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -65,8 +67,8 @@ export class UserInvites {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -153,6 +155,8 @@ export class UserInvites {
     }
 
     /**
+     * Create a User Invite.
+     *
      * @param {Tesseral.UserInvite} request
      * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -178,8 +182,8 @@ export class UserInvites {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +270,9 @@ export class UserInvites {
     }
 
     /**
-     * @param {string} id
+     * Get a User Invite.
+     *
+     * @param {string} id - The User Invite ID.
      * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -291,8 +297,8 @@ export class UserInvites {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -378,7 +384,9 @@ export class UserInvites {
     }
 
     /**
-     * @param {string} id
+     * Delete a User Invite.
+     *
+     * @param {string} id - The User Invite ID.
      * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -403,8 +411,8 @@ export class UserInvites {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

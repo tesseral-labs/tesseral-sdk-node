@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface UpdatePasskeyResponse {
+    /** The updated Passkey. */
     passkey?: Tesseral.Passkey;
 }

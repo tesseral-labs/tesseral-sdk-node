@@ -30,6 +30,8 @@ export class SamlConnections {
     constructor(protected readonly _options: SamlConnections.Options = {}) {}
 
     /**
+     * List SAML Connections.
+     *
      * @param {Tesseral.SamlConnectionsListSamlConnectionsRequest} request
      * @param {SamlConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -65,8 +67,8 @@ export class SamlConnections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -153,6 +155,8 @@ export class SamlConnections {
     }
 
     /**
+     * Create a SAML Connection.
+     *
      * @param {Tesseral.SamlConnection} request
      * @param {SamlConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -178,8 +182,8 @@ export class SamlConnections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -266,7 +270,9 @@ export class SamlConnections {
     }
 
     /**
-     * @param {string} id
+     * Get a SAML Connection.
+     *
+     * @param {string} id - The SAML Connection ID.
      * @param {SamlConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -291,8 +297,8 @@ export class SamlConnections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -378,7 +384,9 @@ export class SamlConnections {
     }
 
     /**
-     * @param {string} id
+     * Delete a SAML Connection.
+     *
+     * @param {string} id - The SAML Connection ID.
      * @param {SamlConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
@@ -403,8 +411,8 @@ export class SamlConnections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -490,7 +498,9 @@ export class SamlConnections {
     }
 
     /**
-     * @param {string} id
+     * Update a SAML Connection.
+     *
+     * @param {string} id - The SAML Connection ID.
      * @param {Tesseral.SamlConnection} request
      * @param {SamlConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -517,8 +527,8 @@ export class SamlConnections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "@tesseral/tesseral-node/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "@tesseral/tesseral-node/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -5,6 +5,11 @@
 import * as Tesseral from "../index";
 
 export interface ListScimapiKeysResponse {
+    /** A list of SCIM API Keys. */
     scimApiKeys?: Tesseral.ScimapiKey[];
+    /**
+     * The pagination token for the next page of results. Empty if there is no
+     *  next page.
+     */
     nextPageToken?: string;
 }

@@ -7,6 +7,12 @@
  *     {}
  */
 export interface SessionsListSessionsRequest {
+    /**
+     * The User ID.
+     */
     userId?: string;
+    /**
+     * A pagination token. Leave empty to get the first page of results.
+     */
     pageToken?: string;
 }

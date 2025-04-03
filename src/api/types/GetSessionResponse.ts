@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface GetSessionResponse {
+    /** The requested Session. */
     session?: Tesseral.Session;
 }

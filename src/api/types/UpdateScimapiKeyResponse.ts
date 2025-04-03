@@ -5,5 +5,6 @@
 import * as Tesseral from "../index";
 
 export interface UpdateScimapiKeyResponse {
+    /** The updated SCIM API Key. */
     scimApiKey?: Tesseral.ScimapiKey;
 }

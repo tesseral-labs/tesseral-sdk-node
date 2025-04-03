@@ -5,6 +5,11 @@
 import * as Tesseral from "../index";
 
 export interface ListSamlConnectionsResponse {
+    /** A list of SAML Connections. */
     samlConnections?: Tesseral.SamlConnection[];
+    /**
+     * The pagination token for the next page of results. Empty if there is no
+     *  next page.
+     */
     nextPageToken?: string;
 }

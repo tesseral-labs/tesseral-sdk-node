@@ -7,6 +7,12 @@
  *     {}
  */
 export interface ScimApiKeysListScimapiKeysRequest {
+    /**
+     * The ID of the Organization.
+     */
     organizationId?: string;
+    /**
+     * A pagination token. Leave empty to get the first page of results.
+     */
     pageToken?: string;
 }

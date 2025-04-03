@@ -7,5 +7,8 @@
  *     {}
  */
 export interface OrganizationsListOrganizationsRequest {
+    /**
+     * A pagination token. Leave empty to get the first page of results.
+     */
     pageToken?: string;
 }
