@@ -15,7 +15,7 @@ export const GetSessionResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace GetSessionResponse {
-    interface Raw {
+    export interface Raw {
         session?: Session.Raw | null;
     }
 }

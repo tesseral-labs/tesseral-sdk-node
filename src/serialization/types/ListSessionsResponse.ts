@@ -16,7 +16,7 @@ export const ListSessionsResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace ListSessionsResponse {
-    interface Raw {
+    export interface Raw {
         sessions?: Session.Raw[] | null;
         nextPageToken?: string | null;
     }

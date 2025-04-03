@@ -15,7 +15,7 @@ export const UpdateOrganizationDomainsResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace UpdateOrganizationDomainsResponse {
-    interface Raw {
+    export interface Raw {
         organizationDomains?: OrganizationDomains.Raw | null;
     }
 }

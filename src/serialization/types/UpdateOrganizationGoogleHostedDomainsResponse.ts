@@ -15,7 +15,7 @@ export const UpdateOrganizationGoogleHostedDomainsResponse: core.serialization.O
 });
 
 export declare namespace UpdateOrganizationGoogleHostedDomainsResponse {
-    interface Raw {
+    export interface Raw {
         organizationGoogleHostedDomains?: OrganizationGoogleHostedDomains.Raw | null;
     }
 }

@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace ScimApiKeys {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         backendApiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -45,10 +49,10 @@ export class ScimApiKeys {
      */
     public async listScimapiKeys(
         request: Tesseral.ScimApiKeysListScimapiKeysRequest = {},
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.ListScimapiKeysResponse> {
         const { organizationId, pageToken } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (organizationId != null) {
             _queryParams["organizationId"] = organizationId;
         }
@@ -59,18 +63,21 @@ export class ScimApiKeys {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                "v1/scim-api-keys"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                "v1/scim-api-keys",
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -99,7 +106,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -109,7 +116,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -119,7 +126,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -129,7 +136,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -146,7 +153,7 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/scim-api-keys.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -170,22 +177,25 @@ export class ScimApiKeys {
      */
     public async createScimapiKey(
         request: Tesseral.ScimapiKey,
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.CreateScimapiKeyResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                "v1/scim-api-keys"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                "v1/scim-api-keys",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -214,7 +224,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -224,7 +234,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -234,7 +244,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -244,7 +254,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -261,7 +271,7 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/scim-api-keys.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -285,22 +295,25 @@ export class ScimApiKeys {
      */
     public async getScimapiKey(
         id: string,
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.GetScimapiKeyResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/scim-api-keys/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/scim-api-keys/${encodeURIComponent(id)}`,
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -328,7 +341,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -338,7 +351,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -348,7 +361,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -358,7 +371,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -375,7 +388,7 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/scim-api-keys/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -399,22 +412,25 @@ export class ScimApiKeys {
      */
     public async deleteScimapiKey(
         id: string,
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.DeleteScimapiKeyResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/scim-api-keys/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/scim-api-keys/${encodeURIComponent(id)}`,
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -442,7 +458,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -452,7 +468,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -462,7 +478,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -472,7 +488,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -489,7 +505,7 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling DELETE /v1/scim-api-keys/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -515,22 +531,25 @@ export class ScimApiKeys {
     public async updateScimapiKey(
         id: string,
         request: Tesseral.ScimapiKey,
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.UpdateScimapiKeyResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/scim-api-keys/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/scim-api-keys/${encodeURIComponent(id)}`,
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -559,7 +578,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -569,7 +588,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -579,7 +598,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -589,7 +608,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -606,7 +625,7 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling PATCH /v1/scim-api-keys/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -630,22 +649,25 @@ export class ScimApiKeys {
      */
     public async revokeScimapiKey(
         id: string,
-        requestOptions?: ScimApiKeys.RequestOptions
+        requestOptions?: ScimApiKeys.RequestOptions,
     ): Promise<Tesseral.RevokeScimapiKeyResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/scim-api-keys/${encodeURIComponent(id)}/revoke`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/scim-api-keys/${encodeURIComponent(id)}/revoke`,
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -673,7 +695,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -683,7 +705,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -693,7 +715,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -703,7 +725,7 @@ export class ScimApiKeys {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -720,7 +742,9 @@ export class ScimApiKeys {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling POST /v1/scim-api-keys/{id}/revoke.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,

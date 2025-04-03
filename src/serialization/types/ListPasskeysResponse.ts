@@ -16,7 +16,7 @@ export const ListPasskeysResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace ListPasskeysResponse {
-    interface Raw {
+    export interface Raw {
         passkeys?: Passkey.Raw[] | null;
         nextPageToken?: string | null;
     }

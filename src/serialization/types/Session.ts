@@ -17,7 +17,7 @@ export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, T
     });
 
 export declare namespace Session {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         userId?: string | null;
         revoked?: boolean | null;

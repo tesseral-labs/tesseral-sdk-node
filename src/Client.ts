@@ -14,68 +14,65 @@ import { UserInvites } from "./api/resources/userInvites/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 
 export declare namespace TesseralClient {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         backendApiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
 export class TesseralClient {
-    constructor(protected readonly _options: TesseralClient.Options = {}) {}
-
     protected _organizations: Organizations | undefined;
+    protected _passkeys: Passkeys | undefined;
+    protected _projects: Projects | undefined;
+    protected _samlConnections: SamlConnections | undefined;
+    protected _scimApiKeys: ScimApiKeys | undefined;
+    protected _sessions: Sessions | undefined;
+    protected _userInvites: UserInvites | undefined;
+    protected _users: Users | undefined;
+
+    constructor(protected readonly _options: TesseralClient.Options = {}) {}
 
     public get organizations(): Organizations {
         return (this._organizations ??= new Organizations(this._options));
     }
 
-    protected _passkeys: Passkeys | undefined;
-
     public get passkeys(): Passkeys {
         return (this._passkeys ??= new Passkeys(this._options));
     }
-
-    protected _projects: Projects | undefined;
 
     public get projects(): Projects {
         return (this._projects ??= new Projects(this._options));
     }
 
-    protected _samlConnections: SamlConnections | undefined;
-
     public get samlConnections(): SamlConnections {
         return (this._samlConnections ??= new SamlConnections(this._options));
     }
-
-    protected _scimApiKeys: ScimApiKeys | undefined;
 
     public get scimApiKeys(): ScimApiKeys {
         return (this._scimApiKeys ??= new ScimApiKeys(this._options));
     }
 
-    protected _sessions: Sessions | undefined;
-
     public get sessions(): Sessions {
         return (this._sessions ??= new Sessions(this._options));
     }
 
-    protected _userInvites: UserInvites | undefined;
-
     public get userInvites(): UserInvites {
         return (this._userInvites ??= new UserInvites(this._options));
     }
-
-    protected _users: Users | undefined;
 
     public get users(): Users {
         return (this._users ??= new Users(this._options));

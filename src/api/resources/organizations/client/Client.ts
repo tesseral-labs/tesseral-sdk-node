@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Organizations {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         backendApiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -45,28 +49,31 @@ export class Organizations {
      */
     public async listOrganizations(
         request: Tesseral.OrganizationsListOrganizationsRequest = {},
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.ListOrganizationsResponse> {
         const { pageToken } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (pageToken != null) {
             _queryParams["pageToken"] = pageToken;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                "v1/organizations"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                "v1/organizations",
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -95,7 +102,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -105,7 +112,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -115,7 +122,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -125,7 +132,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -142,7 +149,7 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/organizations.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -166,22 +173,25 @@ export class Organizations {
      */
     public async createOrganization(
         request: Tesseral.Organization,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.CreateOrganizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                "v1/organizations"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                "v1/organizations",
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -210,7 +220,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -220,7 +230,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -230,7 +240,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -240,7 +250,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -257,7 +267,7 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/organizations.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -281,22 +291,25 @@ export class Organizations {
      */
     public async getOrganization(
         id: string,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.GetOrganizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(id)}`,
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -324,7 +337,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -334,7 +347,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -344,7 +357,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -354,7 +367,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -371,7 +384,7 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/organizations/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -395,22 +408,25 @@ export class Organizations {
      */
     public async deleteOrganization(
         id: string,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.DeleteOrganizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(id)}`,
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -438,7 +454,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -448,7 +464,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -458,7 +474,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -468,7 +484,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -485,7 +501,7 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling DELETE /v1/organizations/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -511,22 +527,25 @@ export class Organizations {
     public async updateOrganization(
         id: string,
         request: Tesseral.Organization,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.UpdateOrganizationResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(id)}`,
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -555,7 +574,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -565,7 +584,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -575,7 +594,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -585,7 +604,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -602,7 +621,7 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling PATCH /v1/organizations/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -626,22 +645,25 @@ export class Organizations {
      */
     public async getOrganizationDomains(
         organizationId: string,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.GetOrganizationDomainsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/domains`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/domains`,
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -669,7 +691,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -679,7 +701,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -689,7 +711,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -699,7 +721,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -716,7 +738,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling GET /v1/organizations/{organizationId}/domains.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -742,22 +766,25 @@ export class Organizations {
     public async updateOrganizationDomains(
         organizationId: string,
         request: Tesseral.OrganizationDomains,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.UpdateOrganizationDomainsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/domains`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/domains`,
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -786,7 +813,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -796,7 +823,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -806,7 +833,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -816,7 +843,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -833,7 +860,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling PATCH /v1/organizations/{organizationId}/domains.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -857,22 +886,25 @@ export class Organizations {
      */
     public async getOrganizationGoogleHostedDomains(
         organizationId: string,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.GetOrganizationGoogleHostedDomainsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/google-hosted-domains`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/google-hosted-domains`,
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -900,7 +932,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -910,7 +942,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -920,7 +952,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -930,7 +962,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -947,7 +979,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling GET /v1/organizations/{organizationId}/google-hosted-domains.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -973,22 +1007,25 @@ export class Organizations {
     public async updateOrganizationGoogleHostedDomains(
         organizationId: string,
         request: Tesseral.OrganizationGoogleHostedDomains,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.UpdateOrganizationGoogleHostedDomainsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/google-hosted-domains`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/google-hosted-domains`,
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -1017,7 +1054,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -1027,7 +1064,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -1037,7 +1074,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -1047,7 +1084,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -1064,7 +1101,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling PATCH /v1/organizations/{organizationId}/google-hosted-domains.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -1088,22 +1127,25 @@ export class Organizations {
      */
     public async getOrganizationMicrosoftTenantIDs(
         organizationId: string,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.GetOrganizationMicrosoftTenantIDsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/microsoft-tenant-ids`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/microsoft-tenant-ids`,
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -1131,7 +1173,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -1141,7 +1183,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -1151,7 +1193,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -1161,7 +1203,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -1178,7 +1220,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling GET /v1/organizations/{organizationId}/microsoft-tenant-ids.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -1204,22 +1248,25 @@ export class Organizations {
     public async updateOrganizationMicrosoftTenantIDs(
         organizationId: string,
         request: Tesseral.OrganizationMicrosoftTenantIDs,
-        requestOptions?: Organizations.RequestOptions
+        requestOptions?: Organizations.RequestOptions,
     ): Promise<Tesseral.UpdateOrganizationMicrosoftTenantIDsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.TesseralEnvironment.Default,
-                `v1/organizations/${encodeURIComponent(organizationId)}/microsoft-tenant-ids`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.TesseralEnvironment.Default,
+                `v1/organizations/${encodeURIComponent(organizationId)}/microsoft-tenant-ids`,
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@tesseral/tesseral-node",
-                "X-Fern-SDK-Version": "0.0.8",
-                "User-Agent": "@tesseral/tesseral-node/0.0.8",
+                "X-Fern-SDK-Version": "0.0.9",
+                "User-Agent": "@tesseral/tesseral-node/0.0.9",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -1248,7 +1295,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 401:
                     throw new Tesseral.UnauthorizedError(
@@ -1258,7 +1305,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 403:
                     throw new Tesseral.ForbiddenError(
@@ -1268,7 +1315,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 case 404:
                     throw new Tesseral.NotFoundError(
@@ -1278,7 +1325,7 @@ export class Organizations {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.TesseralError({
@@ -1295,7 +1342,9 @@ export class Organizations {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError();
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling PATCH /v1/organizations/{organizationId}/microsoft-tenant-ids.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,

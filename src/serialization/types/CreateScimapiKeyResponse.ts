@@ -15,7 +15,7 @@ export const CreateScimapiKeyResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace CreateScimapiKeyResponse {
-    interface Raw {
+    export interface Raw {
         scimApiKey?: ScimapiKey.Raw | null;
     }
 }

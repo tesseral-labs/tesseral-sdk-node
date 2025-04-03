@@ -14,7 +14,7 @@ export const AccessTokenImpersonator: core.serialization.ObjectSchema<
 });
 
 export declare namespace AccessTokenImpersonator {
-    interface Raw {
+    export interface Raw {
         email?: string | null;
     }
 }

@@ -15,7 +15,7 @@ export const GetUserResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace GetUserResponse {
-    interface Raw {
+    export interface Raw {
         user?: User.Raw | null;
     }
 }

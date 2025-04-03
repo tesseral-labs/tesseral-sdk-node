@@ -16,7 +16,7 @@ export const ListScimapiKeysResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace ListScimapiKeysResponse {
-    interface Raw {
+    export interface Raw {
         scimApiKeys?: ScimapiKey.Raw[] | null;
         nextPageToken?: string | null;
     }

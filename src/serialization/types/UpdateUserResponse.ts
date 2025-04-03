@@ -15,7 +15,7 @@ export const UpdateUserResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace UpdateUserResponse {
-    interface Raw {
+    export interface Raw {
         user?: User.Raw | null;
     }
 }

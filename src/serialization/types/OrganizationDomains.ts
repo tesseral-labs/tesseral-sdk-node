@@ -15,7 +15,7 @@ export const OrganizationDomains: core.serialization.ObjectSchema<
 });
 
 export declare namespace OrganizationDomains {
-    interface Raw {
+    export interface Raw {
         organizationId?: string | null;
         domains?: string[] | null;
     }

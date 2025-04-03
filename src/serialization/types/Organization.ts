@@ -24,7 +24,7 @@ export const Organization: core.serialization.ObjectSchema<serializers.Organizat
     });
 
 export declare namespace Organization {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         displayName?: string | null;
         createTime?: string | null;

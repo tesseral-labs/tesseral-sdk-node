@@ -14,7 +14,7 @@ export const AccessTokenSession: core.serialization.ObjectSchema<
 });
 
 export declare namespace AccessTokenSession {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
     }
 }

@@ -27,7 +27,7 @@ export const AccessTokenClaims: core.serialization.ObjectSchema<
 });
 
 export declare namespace AccessTokenClaims {
-    interface Raw {
+    export interface Raw {
         iss?: string | null;
         sub?: string | null;
         aud?: string | null;

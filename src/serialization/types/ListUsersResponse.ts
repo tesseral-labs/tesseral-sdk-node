@@ -16,7 +16,7 @@ export const ListUsersResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace ListUsersResponse {
-    interface Raw {
+    export interface Raw {
         users?: User.Raw[] | null;
         nextPageToken?: string | null;
     }

@@ -32,7 +32,7 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
     });
 
 export declare namespace Project {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         displayName?: string | null;
         createTime?: string | null;

@@ -20,7 +20,7 @@ export const Passkey: core.serialization.ObjectSchema<serializers.Passkey.Raw, T
     });
 
 export declare namespace Passkey {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         userId?: string | null;
         createTime?: string | null;

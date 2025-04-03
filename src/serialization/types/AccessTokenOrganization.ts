@@ -15,7 +15,7 @@ export const AccessTokenOrganization: core.serialization.ObjectSchema<
 });
 
 export declare namespace AccessTokenOrganization {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         displayName?: string | null;
     }

@@ -18,7 +18,7 @@ export const ScimapiKey: core.serialization.ObjectSchema<serializers.ScimapiKey.
     });
 
 export declare namespace ScimapiKey {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         organizationId?: string | null;
         createTime?: string | null;

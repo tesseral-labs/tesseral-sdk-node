@@ -15,7 +15,7 @@ export const GetOrganizationMicrosoftTenantIDsResponse: core.serialization.Objec
 });
 
 export declare namespace GetOrganizationMicrosoftTenantIDsResponse {
-    interface Raw {
+    export interface Raw {
         organizationMicrosoftTenantIds?: OrganizationMicrosoftTenantIDs.Raw | null;
     }
 }

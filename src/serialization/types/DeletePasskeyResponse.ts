@@ -12,5 +12,5 @@ export const DeletePasskeyResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({});
 
 export declare namespace DeletePasskeyResponse {
-    interface Raw {}
+    export interface Raw {}
 }

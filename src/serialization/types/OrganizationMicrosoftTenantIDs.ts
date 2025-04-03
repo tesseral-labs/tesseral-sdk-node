@@ -15,7 +15,7 @@ export const OrganizationMicrosoftTenantIDs: core.serialization.ObjectSchema<
 });
 
 export declare namespace OrganizationMicrosoftTenantIDs {
-    interface Raw {
+    export interface Raw {
         organizationId?: string | null;
         microsoftTenantIds?: string[] | null;
     }

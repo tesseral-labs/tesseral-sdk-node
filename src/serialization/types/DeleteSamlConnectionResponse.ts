@@ -12,5 +12,5 @@ export const DeleteSamlConnectionResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({});
 
 export declare namespace DeleteSamlConnectionResponse {
-    interface Raw {}
+    export interface Raw {}
 }

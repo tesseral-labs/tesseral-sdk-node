@@ -12,5 +12,5 @@ export const DeleteUserResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({});
 
 export declare namespace DeleteUserResponse {
-    interface Raw {}
+    export interface Raw {}
 }

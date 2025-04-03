@@ -15,7 +15,7 @@ export const UpdatePasskeyResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace UpdatePasskeyResponse {
-    interface Raw {
+    export interface Raw {
         passkey?: Passkey.Raw | null;
     }
 }

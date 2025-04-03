@@ -15,7 +15,7 @@ export const GetProjectResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace GetProjectResponse {
-    interface Raw {
+    export interface Raw {
         project?: Project.Raw | null;
     }
 }

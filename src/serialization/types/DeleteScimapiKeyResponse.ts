@@ -12,5 +12,5 @@ export const DeleteScimapiKeyResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({});
 
 export declare namespace DeleteScimapiKeyResponse {
-    interface Raw {}
+    export interface Raw {}
 }

@@ -16,7 +16,7 @@ export const ListUserInvitesResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace ListUserInvitesResponse {
-    interface Raw {
+    export interface Raw {
         userInvites?: UserInvite.Raw[] | null;
         nextPageToken?: string | null;
     }
