@@ -1,6 +1,6 @@
 {
     "name": "@tesseral/tesseral-node",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "private": false,
     "repository": "https://github.com/tesseral-labs/tesseral-sdk-node",
     "main": "./index.js",
