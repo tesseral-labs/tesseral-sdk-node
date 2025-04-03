@@ -1,8 +1,4 @@
-import {
-    authenticateAccessToken,
-    InvalidAccessTokenError,
-    parseJwks
-} from "../src/authenticate";
+import { __exportedForTests } from "../src/authenticate";
 
 const ACCESS_TOKEN_TEST_CASES = [
     {
@@ -128,13 +124,25 @@ const ACCESS_TOKEN_TEST_CASES = [
 describe("authenticate", () => {
     for (const testCase of ACCESS_TOKEN_TEST_CASES) {
         it(testCase.name, () => {
-            const jwks = parseJwks(JSON.parse(testCase.jwks));
+            const { jwks } = __exportedForTests.parseConfig(JSON.parse(testCase.jwks));
 
             if (testCase.claims) {
-                expect(authenticateAccessToken({ jwks, accessToken: testCase.accessToken, nowUnixSeconds: testCase.nowUnixSeconds })).toEqual(testCase.claims)
+                expect(
+                    __exportedForTests.authenticateAccessToken({
+                        jwks,
+                        accessToken: testCase.accessToken,
+                        nowUnixSeconds: testCase.nowUnixSeconds,
+                    })
+                ).toEqual(testCase.claims);
             } else {
-                expect(() => authenticateAccessToken({ jwks, accessToken: testCase.accessToken, nowUnixSeconds: testCase.nowUnixSeconds })).toThrow(InvalidAccessTokenError)
+                expect(() =>
+                    __exportedForTests.authenticateAccessToken({
+                        jwks,
+                        accessToken: testCase.accessToken,
+                        nowUnixSeconds: testCase.nowUnixSeconds,
+                    })
+                ).toThrow();
             }
-        })
+        });
     }
-})
+});
