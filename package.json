@@ -1,8 +1,9 @@
 {
     "name": "@tesseral/tesseral-node",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "private": false,
     "repository": "https://github.com/tesseral-labs/tesseral-sdk-node",
+    "license": "MIT",
     "main": "./index.js",
     "types": "./index.d.ts",
     "scripts": {

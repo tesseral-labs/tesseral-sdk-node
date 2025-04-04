@@ -7,5 +7,5 @@
  */
 export interface AccessTokenSession {
     /** The Session ID. */
-    id?: string;
+    id: string;
 }

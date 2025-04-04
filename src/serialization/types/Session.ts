@@ -14,6 +14,7 @@ export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, T
         createTime: core.serialization.date().optional(),
         lastActiveTime: core.serialization.date().optional(),
         expireTime: core.serialization.date().optional(),
+        primaryAuthFactor: core.serialization.number().optional(),
     });
 
 export declare namespace Session {
@@ -24,5 +25,6 @@ export declare namespace Session {
         createTime?: string | null;
         lastActiveTime?: string | null;
         expireTime?: string | null;
+        primaryAuthFactor?: number | null;
     }
 }

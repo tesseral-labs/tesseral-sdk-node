@@ -10,11 +10,11 @@ export const AccessTokenSession: core.serialization.ObjectSchema<
     serializers.AccessTokenSession.Raw,
     Tesseral.AccessTokenSession
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
+    id: core.serialization.string(),
 });
 
 export declare namespace AccessTokenSession {
     export interface Raw {
-        id?: string | null;
+        id: string;
     }
 }

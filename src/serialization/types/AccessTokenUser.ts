@@ -10,15 +10,13 @@ export const AccessTokenUser: core.serialization.ObjectSchema<
     serializers.AccessTokenUser.Raw,
     Tesseral.AccessTokenUser
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
-    email: core.serialization.string().optional(),
-    displayName: core.serialization.string().optional(),
+    id: core.serialization.string(),
+    email: core.serialization.string(),
 });
 
 export declare namespace AccessTokenUser {
     export interface Raw {
-        id?: string | null;
-        email?: string | null;
-        displayName?: string | null;
+        id: string;
+        email: string;
     }
 }

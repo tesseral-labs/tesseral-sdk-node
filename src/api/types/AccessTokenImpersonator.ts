@@ -7,5 +7,5 @@
  */
 export interface AccessTokenImpersonator {
     /** The email address of the individual on your staff impersonating the User. */
-    email?: string;
+    email: string;
 }

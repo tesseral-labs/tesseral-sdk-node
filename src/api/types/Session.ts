@@ -18,4 +18,6 @@ export interface Session {
     lastActiveTime?: Date;
     /** When the Session expires. */
     expireTime?: Date;
+    /** The primary authentication factor the end user used to log in. */
+    primaryAuthFactor?: number;
 }

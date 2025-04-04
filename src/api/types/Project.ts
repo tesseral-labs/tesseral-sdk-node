@@ -48,6 +48,8 @@ export interface Project {
     microsoftOauthClientSecret?: string;
     /** The domain where the Project's Vault lives. */
     vaultDomain?: string;
+    /** Whether vault_domain is different from the automatically-assigned one. */
+    vaultDomainCustom?: boolean;
     /**
      * The set of domains the Project trusts.
      *
@@ -55,6 +57,8 @@ export interface Project {
      *  logged-in Users.
      */
     trustedDomains?: string[];
+    /** The domain that authentication cookies are stored on. */
+    cookieDomain?: string;
     /** Where Users are redirected after returning from the Vault. */
     redirectUri?: string;
     /** Where Users are redirected after logging in. */

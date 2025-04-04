@@ -10,13 +10,13 @@ export const AccessTokenOrganization: core.serialization.ObjectSchema<
     serializers.AccessTokenOrganization.Raw,
     Tesseral.AccessTokenOrganization
 > = core.serialization.object({
-    id: core.serialization.string().optional(),
-    displayName: core.serialization.string().optional(),
+    id: core.serialization.string(),
+    displayName: core.serialization.string(),
 });
 
 export declare namespace AccessTokenOrganization {
     export interface Raw {
-        id?: string | null;
-        displayName?: string | null;
+        id: string;
+        displayName: string;
     }
 }

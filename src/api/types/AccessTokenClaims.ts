@@ -12,23 +12,23 @@ export interface AccessTokenClaims {
      * Will always be of the form "https://project-xxx.tesseral.app", where
      *  "project-xxx" is your Project ID.
      */
-    iss?: string;
+    iss: string;
     /** Will always be equal to the `user.id` claim. */
-    sub?: string;
+    sub: string;
     /** Will always be equal to the `iss` claim. */
-    aud?: string;
+    aud: string;
     /** When this Access Token expires, in seconds since the unix epoch. */
-    exp?: number;
+    exp: number;
     /** When this Access Token was issued, in seconds since the unix epoch. */
-    nbf?: number;
+    nbf: number;
     /** Will always be equal to the `nbf` claim. */
-    iat?: number;
+    iat: number;
     /** The Organization the User is logged into. */
-    organization?: Tesseral.AccessTokenOrganization;
+    organization: Tesseral.AccessTokenOrganization;
     /** The User that's logged in. */
-    user?: Tesseral.AccessTokenUser;
+    user: Tesseral.AccessTokenUser;
     /** The user's current Session. */
-    session?: Tesseral.AccessTokenSession;
+    session: Tesseral.AccessTokenSession;
     /**
      * If this is an impersonated Session, this contains information about who on
      *  your staff is impersonating the user.

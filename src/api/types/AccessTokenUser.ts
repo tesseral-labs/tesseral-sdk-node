@@ -7,9 +7,7 @@
  */
 export interface AccessTokenUser {
     /** The User's ID. */
-    id?: string;
+    id: string;
     /** The User's email. */
-    email?: string;
-    /** The User's display name. */
-    displayName?: string;
+    email: string;
 }
