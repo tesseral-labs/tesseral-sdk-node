@@ -8,7 +8,7 @@
  */
 export interface AccessTokenOrganization {
     /** The Organization's ID. */
-    id?: string;
+    id: string;
     /** The Organization's display name. */
-    displayName?: string;
+    displayName: string;
 }

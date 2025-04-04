@@ -24,7 +24,9 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         microsoftOauthClientId: core.serialization.string().optional(),
         microsoftOauthClientSecret: core.serialization.string().optional(),
         vaultDomain: core.serialization.string().optional(),
+        vaultDomainCustom: core.serialization.boolean().optional(),
         trustedDomains: core.serialization.list(core.serialization.string()).optional(),
+        cookieDomain: core.serialization.string().optional(),
         redirectUri: core.serialization.string().optional(),
         afterLoginRedirectUri: core.serialization.string().optional(),
         afterSignupRedirectUri: core.serialization.string().optional(),
@@ -49,7 +51,9 @@ export declare namespace Project {
         microsoftOauthClientId?: string | null;
         microsoftOauthClientSecret?: string | null;
         vaultDomain?: string | null;
+        vaultDomainCustom?: boolean | null;
         trustedDomains?: string[] | null;
+        cookieDomain?: string | null;
         redirectUri?: string | null;
         afterLoginRedirectUri?: string | null;
         afterSignupRedirectUri?: string | null;

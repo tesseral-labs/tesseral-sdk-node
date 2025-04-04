@@ -14,29 +14,29 @@ export const AccessTokenClaims: core.serialization.ObjectSchema<
     serializers.AccessTokenClaims.Raw,
     Tesseral.AccessTokenClaims
 > = core.serialization.object({
-    iss: core.serialization.string().optional(),
-    sub: core.serialization.string().optional(),
-    aud: core.serialization.string().optional(),
-    exp: core.serialization.number().optional(),
-    nbf: core.serialization.number().optional(),
-    iat: core.serialization.number().optional(),
-    organization: AccessTokenOrganization.optional(),
-    user: AccessTokenUser.optional(),
-    session: AccessTokenSession.optional(),
+    iss: core.serialization.string(),
+    sub: core.serialization.string(),
+    aud: core.serialization.string(),
+    exp: core.serialization.number(),
+    nbf: core.serialization.number(),
+    iat: core.serialization.number(),
+    organization: AccessTokenOrganization,
+    user: AccessTokenUser,
+    session: AccessTokenSession,
     impersonator: AccessTokenImpersonator.optional(),
 });
 
 export declare namespace AccessTokenClaims {
     export interface Raw {
-        iss?: string | null;
-        sub?: string | null;
-        aud?: string | null;
-        exp?: number | null;
-        nbf?: number | null;
-        iat?: number | null;
-        organization?: AccessTokenOrganization.Raw | null;
-        user?: AccessTokenUser.Raw | null;
-        session?: AccessTokenSession.Raw | null;
+        iss: string;
+        sub: string;
+        aud: string;
+        exp: number;
+        nbf: number;
+        iat: number;
+        organization: AccessTokenOrganization.Raw;
+        user: AccessTokenUser.Raw;
+        session: AccessTokenSession.Raw;
         impersonator?: AccessTokenImpersonator.Raw | null;
     }
 }
