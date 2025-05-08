@@ -12,11 +12,15 @@ export const AccessTokenUser: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     email: core.serialization.string(),
+    displayName: core.serialization.string().optional(),
+    profilePictureUrl: core.serialization.string().optional(),
 });
 
 export declare namespace AccessTokenUser {
     export interface Raw {
         id: string;
         email: string;
+        displayName?: string | null;
+        profilePictureUrl?: string | null;
     }
 }

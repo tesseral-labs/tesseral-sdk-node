@@ -29,4 +29,8 @@ export interface User {
     microsoftUserId?: string;
     /** Whether the User has an authenticator app set up. */
     hasAuthenticatorApp?: boolean;
+    /** The User's human-friendly name. */
+    displayName?: string;
+    /** The URL of the User's profile picture. */
+    profilePictureUrl?: string;
 }
