@@ -20,6 +20,7 @@ export const AccessTokenClaims: core.serialization.ObjectSchema<
     exp: core.serialization.number(),
     nbf: core.serialization.number(),
     iat: core.serialization.number(),
+    actions: core.serialization.list(core.serialization.string()).optional(),
     organization: AccessTokenOrganization,
     user: AccessTokenUser,
     session: AccessTokenSession,
@@ -34,6 +35,7 @@ export declare namespace AccessTokenClaims {
         exp: number;
         nbf: number;
         iat: number;
+        actions?: string[] | null;
         organization: AccessTokenOrganization.Raw;
         user: AccessTokenUser.Raw;
         session: AccessTokenSession.Raw;

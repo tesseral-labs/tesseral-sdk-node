@@ -7,10 +7,12 @@ import * as core from "./core";
 import { Organizations } from "./api/resources/organizations/client/Client";
 import { Passkeys } from "./api/resources/passkeys/client/Client";
 import { Projects } from "./api/resources/projects/client/Client";
+import { Roles } from "./api/resources/roles/client/Client";
 import { SamlConnections } from "./api/resources/samlConnections/client/Client";
 import { ScimApiKeys } from "./api/resources/scimApiKeys/client/Client";
 import { Sessions } from "./api/resources/sessions/client/Client";
 import { UserInvites } from "./api/resources/userInvites/client/Client";
+import { UserRoleAssignments } from "./api/resources/userRoleAssignments/client/Client";
 import { Users } from "./api/resources/users/client/Client";
 
 export declare namespace TesseralClient {
@@ -38,10 +40,12 @@ export class TesseralClient {
     protected _organizations: Organizations | undefined;
     protected _passkeys: Passkeys | undefined;
     protected _projects: Projects | undefined;
+    protected _roles: Roles | undefined;
     protected _samlConnections: SamlConnections | undefined;
     protected _scimApiKeys: ScimApiKeys | undefined;
     protected _sessions: Sessions | undefined;
     protected _userInvites: UserInvites | undefined;
+    protected _userRoleAssignments: UserRoleAssignments | undefined;
     protected _users: Users | undefined;
 
     constructor(protected readonly _options: TesseralClient.Options = {}) {}
@@ -58,6 +62,10 @@ export class TesseralClient {
         return (this._projects ??= new Projects(this._options));
     }
 
+    public get roles(): Roles {
+        return (this._roles ??= new Roles(this._options));
+    }
+
     public get samlConnections(): SamlConnections {
         return (this._samlConnections ??= new SamlConnections(this._options));
     }
@@ -72,6 +80,10 @@ export class TesseralClient {
 
     public get userInvites(): UserInvites {
         return (this._userInvites ??= new UserInvites(this._options));
+    }
+
+    public get userRoleAssignments(): UserRoleAssignments {
+        return (this._userRoleAssignments ??= new UserRoleAssignments(this._options));
     }
 
     public get users(): Users {
