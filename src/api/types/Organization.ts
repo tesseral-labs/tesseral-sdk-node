@@ -32,4 +32,6 @@ export interface Organization {
     requireMfa?: boolean;
     /** Whether the Organization has SCIM enabled. */
     scimEnabled?: boolean;
+    /** Whether the Organization's Users can create Organization-specific Roles. */
+    customRolesEnabled?: boolean;
 }

@@ -21,6 +21,7 @@ export const Organization: core.serialization.ObjectSchema<serializers.Organizat
         logInWithPasskey: core.serialization.boolean().optional(),
         requireMfa: core.serialization.boolean().optional(),
         scimEnabled: core.serialization.boolean().optional(),
+        customRolesEnabled: core.serialization.boolean().optional(),
     });
 
 export declare namespace Organization {
@@ -38,5 +39,6 @@ export declare namespace Organization {
         logInWithPasskey?: boolean | null;
         requireMfa?: boolean | null;
         scimEnabled?: boolean | null;
+        customRolesEnabled?: boolean | null;
     }
 }

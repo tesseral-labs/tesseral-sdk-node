@@ -9,7 +9,7 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
-export declare namespace UserInvites {
+export declare namespace UserRoleAssignments {
     export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -30,14 +30,14 @@ export declare namespace UserInvites {
     }
 }
 
-export class UserInvites {
-    constructor(protected readonly _options: UserInvites.Options = {}) {}
+export class UserRoleAssignments {
+    constructor(protected readonly _options: UserRoleAssignments.Options = {}) {}
 
     /**
-     * List User Invites.
+     * List User Role Assignments.
      *
-     * @param {Tesseral.UserInvitesListUserInvitesRequest} request
-     * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Tesseral.UserRoleAssignmentsListUserRoleAssignmentsRequest} request
+     * @param {UserRoleAssignments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -45,16 +45,20 @@ export class UserInvites {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.userInvites.listUserInvites()
+     *     await client.userRoleAssignments.listUserRoleAssignments()
      */
-    public async listUserInvites(
-        request: Tesseral.UserInvitesListUserInvitesRequest = {},
-        requestOptions?: UserInvites.RequestOptions,
-    ): Promise<Tesseral.ListUserInvitesResponse> {
-        const { organizationId, pageToken } = request;
+    public async listUserRoleAssignments(
+        request: Tesseral.UserRoleAssignmentsListUserRoleAssignmentsRequest = {},
+        requestOptions?: UserRoleAssignments.RequestOptions,
+    ): Promise<Tesseral.ListUserRoleAssignmentsResponse> {
+        const { userId, roleId, pageToken } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (organizationId != null) {
-            _queryParams["organizationId"] = organizationId;
+        if (userId != null) {
+            _queryParams["userId"] = userId;
+        }
+
+        if (roleId != null) {
+            _queryParams["roleId"] = roleId;
         }
 
         if (pageToken != null) {
@@ -66,7 +70,7 @@ export class UserInvites {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                "v1/user-invites",
+                "v1/user-role-assignments",
             ),
             method: "GET",
             headers: {
@@ -87,7 +91,7 @@ export class UserInvites {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.ListUserInvitesResponse.parseOrThrow(_response.body, {
+            return serializers.ListUserRoleAssignmentsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -153,7 +157,7 @@ export class UserInvites {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/user-invites.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/user-role-assignments.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -162,10 +166,10 @@ export class UserInvites {
     }
 
     /**
-     * Create a User Invite.
+     * Create a User Role Assignment.
      *
-     * @param {Tesseral.UserInvitesCreateUserInviteRequest} request
-     * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Tesseral.UserRoleAssignment} request
+     * @param {UserRoleAssignments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -173,26 +177,18 @@ export class UserInvites {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.userInvites.createUserInvite({
-     *         body: {}
-     *     })
+     *     await client.userRoleAssignments.createUserRoleAssignment({})
      */
-    public async createUserInvite(
-        request: Tesseral.UserInvitesCreateUserInviteRequest,
-        requestOptions?: UserInvites.RequestOptions,
-    ): Promise<Tesseral.CreateUserInviteResponse> {
-        const { sendEmail, body: _body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-        if (sendEmail != null) {
-            _queryParams["sendEmail"] = sendEmail.toString();
-        }
-
+    public async createUserRoleAssignment(
+        request: Tesseral.UserRoleAssignment,
+        requestOptions?: UserRoleAssignments.RequestOptions,
+    ): Promise<Tesseral.CreateUserRoleAssignmentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                "v1/user-invites",
+                "v1/user-role-assignments",
             ),
             method: "POST",
             headers: {
@@ -206,15 +202,14 @@ export class UserInvites {
                 ...requestOptions?.headers,
             },
             contentType: "application/json",
-            queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.UserInvite.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.UserRoleAssignment.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CreateUserInviteResponse.parseOrThrow(_response.body, {
+            return serializers.CreateUserRoleAssignmentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -280,7 +275,7 @@ export class UserInvites {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/user-invites.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/user-role-assignments.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -289,10 +284,10 @@ export class UserInvites {
     }
 
     /**
-     * Get a User Invite.
+     * Get a User Role Assignment.
      *
-     * @param {string} id - The User Invite ID.
-     * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id
+     * @param {UserRoleAssignments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -300,18 +295,18 @@ export class UserInvites {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.userInvites.getUserInvite("id")
+     *     await client.userRoleAssignments.getUserRoleAssignment("id")
      */
-    public async getUserInvite(
+    public async getUserRoleAssignment(
         id: string,
-        requestOptions?: UserInvites.RequestOptions,
-    ): Promise<Tesseral.GetUserInviteResponse> {
+        requestOptions?: UserRoleAssignments.RequestOptions,
+    ): Promise<Tesseral.GetUserRoleAssignmentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                `v1/user-invites/${encodeURIComponent(id)}`,
+                `v1/user-role-assignments/${encodeURIComponent(id)}`,
             ),
             method: "GET",
             headers: {
@@ -331,7 +326,7 @@ export class UserInvites {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetUserInviteResponse.parseOrThrow(_response.body, {
+            return serializers.GetUserRoleAssignmentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -397,7 +392,9 @@ export class UserInvites {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/user-invites/{id}.");
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling GET /v1/user-role-assignments/{id}.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -406,10 +403,10 @@ export class UserInvites {
     }
 
     /**
-     * Delete a User Invite.
+     * Delete a User Role Assignment.
      *
-     * @param {string} id - The User Invite ID.
-     * @param {UserInvites.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id
+     * @param {UserRoleAssignments.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -417,18 +414,18 @@ export class UserInvites {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.userInvites.deleteUserInvite("id")
+     *     await client.userRoleAssignments.deleteUserRoleAssignment("id")
      */
-    public async deleteUserInvite(
+    public async deleteUserRoleAssignment(
         id: string,
-        requestOptions?: UserInvites.RequestOptions,
-    ): Promise<Tesseral.DeleteUserInviteResponse> {
+        requestOptions?: UserRoleAssignments.RequestOptions,
+    ): Promise<Tesseral.DeleteUserRoleAssignmentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                `v1/user-invites/${encodeURIComponent(id)}`,
+                `v1/user-role-assignments/${encodeURIComponent(id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -448,7 +445,7 @@ export class UserInvites {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.DeleteUserInviteResponse.parseOrThrow(_response.body, {
+            return serializers.DeleteUserRoleAssignmentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -514,7 +511,9 @@ export class UserInvites {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling DELETE /v1/user-invites/{id}.");
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/user-role-assignments/{id}.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
