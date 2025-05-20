@@ -4,6 +4,8 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import { ApiKeyRoleAssignments } from "./api/resources/apiKeyRoleAssignments/client/Client";
+import { ApiKeys } from "./api/resources/apiKeys/client/Client";
 import { Organizations } from "./api/resources/organizations/client/Client";
 import { Passkeys } from "./api/resources/passkeys/client/Client";
 import { Projects } from "./api/resources/projects/client/Client";
@@ -37,6 +39,8 @@ export declare namespace TesseralClient {
 }
 
 export class TesseralClient {
+    protected _apiKeyRoleAssignments: ApiKeyRoleAssignments | undefined;
+    protected _apiKeys: ApiKeys | undefined;
     protected _organizations: Organizations | undefined;
     protected _passkeys: Passkeys | undefined;
     protected _projects: Projects | undefined;
@@ -49,6 +53,14 @@ export class TesseralClient {
     protected _users: Users | undefined;
 
     constructor(protected readonly _options: TesseralClient.Options = {}) {}
+
+    public get apiKeyRoleAssignments(): ApiKeyRoleAssignments {
+        return (this._apiKeyRoleAssignments ??= new ApiKeyRoleAssignments(this._options));
+    }
+
+    public get apiKeys(): ApiKeys {
+        return (this._apiKeys ??= new ApiKeys(this._options));
+    }
 
     public get organizations(): Organizations {
         return (this._organizations ??= new Organizations(this._options));

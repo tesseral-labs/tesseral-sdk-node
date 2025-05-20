@@ -18,6 +18,8 @@ export interface Organization {
     logInWithGoogle?: boolean;
     /** Whether the Organization supports "Log in with Microsoft". */
     logInWithMicrosoft?: boolean;
+    /** Whether the Organization supports Log in with GitHub. */
+    logInWithGithub?: boolean;
     /** Whether the Organization supports "Log in with email". */
     logInWithEmail?: boolean;
     /** Whether the Organization supports "Log in with password". */
@@ -34,4 +36,6 @@ export interface Organization {
     scimEnabled?: boolean;
     /** Whether the Organization's Users can create Organization-specific Roles. */
     customRolesEnabled?: boolean;
+    /** Whether API Keys are enabled for the Organization. */
+    apiKeysEnabled?: boolean;
 }

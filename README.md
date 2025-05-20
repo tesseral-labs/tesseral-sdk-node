@@ -20,10 +20,10 @@ A full reference for this library is available [here](./reference.md).
 Instantiate and use the client with the following:
 
 ```typescript
-import { TesseralClient, Tesseral } from "@tesseral/tesseral-node";
+import { TesseralClient } from "@tesseral/tesseral-node";
 
 const client = new TesseralClient({ backendApiKey: "YOUR_BACKEND_API_KEY" });
-await client.organizations.createOrganization({});
+await client.apiKeyRoleAssignments.createApiKeyRoleAssignment();
 ```
 
 ## Request And Response Types
@@ -34,7 +34,7 @@ following namespace:
 ```typescript
 import { Tesseral } from "@tesseral/tesseral-node";
 
-const request: Tesseral.OrganizationsListOrganizationsRequest = {
+const request: Tesseral.ApiKeyRoleAssignmentsListApiKeyRoleAssignmentsRequest = {
     ...
 };
 ```
@@ -48,7 +48,7 @@ will be thrown.
 import { TesseralError } from "@tesseral/tesseral-node";
 
 try {
-    await client.organizations.createOrganization(...);
+    await client.apiKeyRoleAssignments.createApiKeyRoleAssignment(...);
 } catch (err) {
     if (err instanceof TesseralError) {
         console.log(err.statusCode);
@@ -65,7 +65,7 @@ try {
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-const response = await client.organizations.createOrganization(..., {
+const response = await client.apiKeyRoleAssignments.createApiKeyRoleAssignment(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -87,7 +87,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.organizations.createOrganization(..., {
+const response = await client.apiKeyRoleAssignments.createApiKeyRoleAssignment(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -97,7 +97,7 @@ const response = await client.organizations.createOrganization(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.organizations.createOrganization(..., {
+const response = await client.apiKeyRoleAssignments.createApiKeyRoleAssignment(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -108,7 +108,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.organizations.createOrganization(..., {
+const response = await client.apiKeyRoleAssignments.createApiKeyRoleAssignment(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

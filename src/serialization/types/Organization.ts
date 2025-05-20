@@ -14,6 +14,7 @@ export const Organization: core.serialization.ObjectSchema<serializers.Organizat
         updateTime: core.serialization.date().optional(),
         logInWithGoogle: core.serialization.boolean().optional(),
         logInWithMicrosoft: core.serialization.boolean().optional(),
+        logInWithGithub: core.serialization.boolean().optional(),
         logInWithEmail: core.serialization.boolean().optional(),
         logInWithPassword: core.serialization.boolean().optional(),
         logInWithSaml: core.serialization.boolean().optional(),
@@ -22,6 +23,7 @@ export const Organization: core.serialization.ObjectSchema<serializers.Organizat
         requireMfa: core.serialization.boolean().optional(),
         scimEnabled: core.serialization.boolean().optional(),
         customRolesEnabled: core.serialization.boolean().optional(),
+        apiKeysEnabled: core.serialization.boolean().optional(),
     });
 
 export declare namespace Organization {
@@ -32,6 +34,7 @@ export declare namespace Organization {
         updateTime?: string | null;
         logInWithGoogle?: boolean | null;
         logInWithMicrosoft?: boolean | null;
+        logInWithGithub?: boolean | null;
         logInWithEmail?: boolean | null;
         logInWithPassword?: boolean | null;
         logInWithSaml?: boolean | null;
@@ -40,5 +43,6 @@ export declare namespace Organization {
         requireMfa?: boolean | null;
         scimEnabled?: boolean | null;
         customRolesEnabled?: boolean | null;
+        apiKeysEnabled?: boolean | null;
     }
 }

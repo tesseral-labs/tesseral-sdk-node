@@ -1,3 +1,5 @@
+export * as apiKeyRoleAssignments from "./apiKeyRoleAssignments";
+export * as apiKeys from "./apiKeys";
 export * as organizations from "./organizations";
 export * as passkeys from "./passkeys";
 export * as projects from "./projects";
@@ -8,6 +10,8 @@ export * as sessions from "./sessions";
 export * as userInvites from "./userInvites";
 export * as userRoleAssignments from "./userRoleAssignments";
 export * as users from "./users";
+export * from "./apiKeyRoleAssignments/client/requests";
+export * from "./apiKeys/client/requests";
 export * from "./organizations/client/requests";
 export * from "./passkeys/client/requests";
 export * from "./roles/client/requests";

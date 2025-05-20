@@ -27,6 +27,8 @@ export interface User {
     googleUserId?: string;
     /** The Microsoft User ID, if the User has ever logged in with Microsoft. */
     microsoftUserId?: string;
+    /** The Github User ID, if the User has ever logged in with GitHub. */
+    githubUserId?: string;
     /** Whether the User has an authenticator app set up. */
     hasAuthenticatorApp?: boolean;
     /** The User's human-friendly name. */
