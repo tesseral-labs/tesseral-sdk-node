@@ -20,6 +20,8 @@ export interface Project {
     logInWithGoogle?: boolean;
     /** Whether the Project supports "Log in with Microsoft". */
     logInWithMicrosoft?: boolean;
+    /** Whether the Project supports "Log in with GitHub". */
+    logInWithGithub?: boolean;
     /** Whether the Project supports "Log in with email". */
     logInWithEmail?: boolean;
     /** Whether the Project supports "Log in with password". */
@@ -46,6 +48,14 @@ export interface Project {
      *  This field is write-only.
      */
     microsoftOauthClientSecret?: string;
+    /** The OAuth Client ID to use for "Log in with GitHub". */
+    githubOauthClientId?: string;
+    /**
+     * The OAuth Client ID to use for "Log in with GitHub"
+     *
+     *  This field is write only.
+     */
+    githubOauthClientSecret?: string;
     /** The domain where the Project's Vault lives. */
     vaultDomain?: string;
     /** Whether vault_domain is different from the automatically-assigned one. */
@@ -67,4 +77,8 @@ export interface Project {
     afterSignupRedirectUri?: string;
     /** Emails sent to Users come from this domain. */
     emailSendFromDomain?: string;
+    /** Whether the Project supports API Keys. */
+    apiKeysEnabled?: boolean;
+    /** The prefix used for API Key secret tokens. */
+    apiKeySecretTokenPrefix?: string;
 }

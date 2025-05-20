@@ -14,6 +14,7 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         updateTime: core.serialization.date().optional(),
         logInWithGoogle: core.serialization.boolean().optional(),
         logInWithMicrosoft: core.serialization.boolean().optional(),
+        logInWithGithub: core.serialization.boolean().optional(),
         logInWithEmail: core.serialization.boolean().optional(),
         logInWithPassword: core.serialization.boolean().optional(),
         logInWithSaml: core.serialization.boolean().optional(),
@@ -23,6 +24,8 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         googleOauthClientSecret: core.serialization.string().optional(),
         microsoftOauthClientId: core.serialization.string().optional(),
         microsoftOauthClientSecret: core.serialization.string().optional(),
+        githubOauthClientId: core.serialization.string().optional(),
+        githubOauthClientSecret: core.serialization.string().optional(),
         vaultDomain: core.serialization.string().optional(),
         vaultDomainCustom: core.serialization.boolean().optional(),
         trustedDomains: core.serialization.list(core.serialization.string()).optional(),
@@ -31,6 +34,8 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         afterLoginRedirectUri: core.serialization.string().optional(),
         afterSignupRedirectUri: core.serialization.string().optional(),
         emailSendFromDomain: core.serialization.string().optional(),
+        apiKeysEnabled: core.serialization.boolean().optional(),
+        apiKeySecretTokenPrefix: core.serialization.string().optional(),
     });
 
 export declare namespace Project {
@@ -41,6 +46,7 @@ export declare namespace Project {
         updateTime?: string | null;
         logInWithGoogle?: boolean | null;
         logInWithMicrosoft?: boolean | null;
+        logInWithGithub?: boolean | null;
         logInWithEmail?: boolean | null;
         logInWithPassword?: boolean | null;
         logInWithSaml?: boolean | null;
@@ -50,6 +56,8 @@ export declare namespace Project {
         googleOauthClientSecret?: string | null;
         microsoftOauthClientId?: string | null;
         microsoftOauthClientSecret?: string | null;
+        githubOauthClientId?: string | null;
+        githubOauthClientSecret?: string | null;
         vaultDomain?: string | null;
         vaultDomainCustom?: boolean | null;
         trustedDomains?: string[] | null;
@@ -58,5 +66,7 @@ export declare namespace Project {
         afterLoginRedirectUri?: string | null;
         afterSignupRedirectUri?: string | null;
         emailSendFromDomain?: string | null;
+        apiKeysEnabled?: boolean | null;
+        apiKeySecretTokenPrefix?: string | null;
     }
 }

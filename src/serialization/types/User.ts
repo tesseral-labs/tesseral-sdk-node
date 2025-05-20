@@ -15,6 +15,7 @@ export const User: core.serialization.ObjectSchema<serializers.User.Raw, Tessera
     owner: core.serialization.boolean().optional(),
     googleUserId: core.serialization.string().optional(),
     microsoftUserId: core.serialization.string().optional(),
+    githubUserId: core.serialization.string().optional(),
     hasAuthenticatorApp: core.serialization.boolean().optional(),
     displayName: core.serialization.string().optional(),
     profilePictureUrl: core.serialization.string().optional(),
@@ -30,6 +31,7 @@ export declare namespace User {
         owner?: boolean | null;
         googleUserId?: string | null;
         microsoftUserId?: string | null;
+        githubUserId?: string | null;
         hasAuthenticatorApp?: boolean | null;
         displayName?: string | null;
         profilePictureUrl?: string | null;
