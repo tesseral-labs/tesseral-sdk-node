@@ -135,7 +135,7 @@ async function parseConfig(configData: any): Promise<Config> {
     return { projectId: configData.projectId, jwks };
 }
 
-class InvalidAccessTokenError extends Error {
+export class InvalidAccessTokenError extends Error {
     constructor() {
         super("Invalid access token");
         Object.setPrototypeOf(this, InvalidAccessTokenError.prototype);
