@@ -31,7 +31,7 @@ export class AccessTokenAuthenticator {
         nowUnixSeconds?: number;
     }): Promise<AccessTokenClaims> {
         await this.updateConfigData();
-        return authenticateAccessToken({
+        return await authenticateAccessToken({
             jwks: this.jwks!,
             accessToken,
             nowUnixSeconds: nowUnixSeconds ?? Date.now() / 1000,
@@ -59,7 +59,7 @@ export class AccessTokenAuthenticator {
     }
 }
 
-function authenticateAccessToken({
+async function authenticateAccessToken({
     jwks,
     accessToken,
     nowUnixSeconds,
@@ -67,7 +67,7 @@ function authenticateAccessToken({
     jwks: Record<string, CryptoKey>;
     accessToken: string;
     nowUnixSeconds: number;
-}): AccessTokenClaims {
+}): Promise<AccessTokenClaims> {
     const parts = accessToken.split(".");
     if (parts.length !== 3) {
         throw new InvalidAccessTokenError();
@@ -83,7 +83,7 @@ function authenticateAccessToken({
     const publicKey = jwks[parsedHeader.kid];
 
     const signature = Buffer.from(rawSignature.replace(/-/g, "+").replace(/_/g, "/"), "base64");
-    const valid = globalThis.crypto.subtle.verify(
+    const valid = await globalThis.crypto.subtle.verify(
         {
             name: "ECDSA",
             hash: "SHA-256",
