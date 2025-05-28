@@ -1,4 +1,4 @@
-import { __exportedForTests } from "../src/authenticate";
+import { __exportedForTests, base64URLDecode } from "../src/authenticate";
 
 const ACCESS_TOKEN_TEST_CASES = [
     {
@@ -135,14 +135,23 @@ describe("authenticate", () => {
                     }),
                 ).toEqual(testCase.claims);
             } else {
-                await expect(async () =>
-                    await __exportedForTests.authenticateAccessToken({
-                        jwks,
-                        accessToken: testCase.accessToken,
-                        nowUnixSeconds: testCase.nowUnixSeconds,
-                    }),
+                await expect(
+                    async () =>
+                        await __exportedForTests.authenticateAccessToken({
+                            jwks,
+                            accessToken: testCase.accessToken,
+                            nowUnixSeconds: testCase.nowUnixSeconds,
+                        }),
                 ).rejects.toThrow();
             }
         });
     }
+});
+
+// Explicit test for base64 URL functionality which would otherwise fail for standard base64 decoders.
+describe("base64URLDecode", () => {
+    const token =
+        "eyJraWQiOiJzZXNzaW9uX3NpZ25pbmdfa2V5XzU3Zmt1NWFpd2dpdWxpYjlvMHN4emF6YmQiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Byb2plY3QtNzlsZHd3d3p5Ym42NmR4YTkxdWRpN21uMy50ZXNzZXJhbC5hcHAiLCJzdWIiOiJ1c2VyXzdjcnR3Y3VvdWZmdDJzYnY2dDN6azJreGQiLCJhdWQiOiJodHRwczovL3Byb2plY3QtNzlsZHd3d3p5Ym42NmR4YTkxdWRpN21uMy50ZXNzZXJhbC5hcHAiLCJleHAiOjE3NDg0NTEzMzMsIm5iZiI6MTc0ODQ1MTAzMywiaWF0IjoxNzQ4NDUxMDMzLCJzZXNzaW9uIjp7ImlkIjoic2Vzc2lvbl8wM2UwZHhxNmRtZjBncmwwZHh1ZGhyamE0In0sInVzZXIiOnsiaWQiOiJ1c2VyXzdjcnR3Y3VvdWZmdDJzYnY2dDN6azJreGQiLCJlbWFpbCI6ImRpbGxvbi5hbmRyZS5ueXNAZ21haWwuY29tIiwiZGlzcGxheU5hbWUiOiJEaWxsb24gTnlzIiwicHJvZmlsZVBpY3R1cmVVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMjQ3NDA4NjM_dj00In0sIm9yZ2FuaXphdGlvbiI6eyJpZCI6Im9yZ19hemI3YmF1eXEyeHU1c3M0Njh5Nmh3N3gxIiwiZGlzcGxheU5hbWUiOiJBQ01FIENvcnAifX0.f8IjcCw9qrK_cEuiyZ_4iR6mgMoc0aaOOhBKumdzpS3uZsj3szP7mprgUc_yTnivWtMwp5V5GvRYGLF8__LPbQ";
+    const claims = token.split(".")[1];
+    expect(() => base64URLDecode(claims)).not.toThrow();
 });

@@ -104,7 +104,7 @@ async function authenticateAccessToken({
     return claims;
 }
 
-function base64URLDecode(s: string): string {
+export function base64URLDecode(s: string): string {
     return Buffer.from(s.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString();
 }
 
