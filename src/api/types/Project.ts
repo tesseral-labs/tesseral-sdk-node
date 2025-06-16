@@ -81,4 +81,6 @@ export interface Project {
     apiKeysEnabled?: boolean;
     /** The prefix used for API Key secret tokens. */
     apiKeySecretTokenPrefix?: string;
+    /** Whether the Project has audit logging enabled. */
+    auditLogsEnabled?: boolean;
 }

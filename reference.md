@@ -590,6 +590,56 @@ await client.apiKeys.revokeApiKey("id");
 </dl>
 </details>
 
+## AuditLogEvents
+
+<details><summary><code>client.auditLogEvents.<a href="/src/api/resources/auditLogEvents/client/Client.ts">createAuditLogEvent</a>({ ...params }) -> Tesseral.CreateAuditLogEventResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.auditLogEvents.createAuditLogEvent({});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Tesseral.AuditLogEvent`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuditLogEvents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Organizations
 
 <details><summary><code>client.organizations.<a href="/src/api/resources/organizations/client/Client.ts">listOrganizations</a>({ ...params }) -> Tesseral.ListOrganizationsResponse</code></summary>
