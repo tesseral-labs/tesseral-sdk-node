@@ -13,7 +13,7 @@ npm i -s @tesseral/tesseral-node
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/tesseral-labs/tesseral-sdk-node/blob/HEAD/./reference.md).
 
 ## Usage
 
