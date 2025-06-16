@@ -36,6 +36,7 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         emailSendFromDomain: core.serialization.string().optional(),
         apiKeysEnabled: core.serialization.boolean().optional(),
         apiKeySecretTokenPrefix: core.serialization.string().optional(),
+        auditLogsEnabled: core.serialization.boolean().optional(),
     });
 
 export declare namespace Project {
@@ -68,5 +69,6 @@ export declare namespace Project {
         emailSendFromDomain?: string | null;
         apiKeysEnabled?: boolean | null;
         apiKeySecretTokenPrefix?: string | null;
+        auditLogsEnabled?: boolean | null;
     }
 }

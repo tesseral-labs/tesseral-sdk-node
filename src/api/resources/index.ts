@@ -1,5 +1,6 @@
 export * as apiKeyRoleAssignments from "./apiKeyRoleAssignments";
 export * as apiKeys from "./apiKeys";
+export * as auditLogEvents from "./auditLogEvents";
 export * as organizations from "./organizations";
 export * as passkeys from "./passkeys";
 export * as projects from "./projects";

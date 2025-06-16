@@ -5,11 +5,11 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Tesseral from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Projects {
+export declare namespace AuditLogEvents {
     export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -30,13 +30,12 @@ export declare namespace Projects {
     }
 }
 
-export class Projects {
-    constructor(protected readonly _options: Projects.Options = {}) {}
+export class AuditLogEvents {
+    constructor(protected readonly _options: AuditLogEvents.Options = {}) {}
 
     /**
-     * Get the current project.
-     *
-     * @param {Projects.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Tesseral.AuditLogEvent} request
+     * @param {AuditLogEvents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -44,17 +43,20 @@ export class Projects {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.projects.getProject()
+     *     await client.auditLogEvents.createAuditLogEvent({})
      */
-    public async getProject(requestOptions?: Projects.RequestOptions): Promise<Tesseral.GetProjectResponse> {
+    public async createAuditLogEvent(
+        request: Tesseral.AuditLogEvent,
+        requestOptions?: AuditLogEvents.RequestOptions,
+    ): Promise<Tesseral.CreateAuditLogEventResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                "v1/project",
+                "v1/audit-log-events",
             ),
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
@@ -67,12 +69,13 @@ export class Projects {
             },
             contentType: "application/json",
             requestType: "json",
+            body: serializers.AuditLogEvent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetProjectResponse.parseOrThrow(_response.body, {
+            return serializers.CreateAuditLogEventResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -138,7 +141,7 @@ export class Projects {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/project.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/audit-log-events.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
