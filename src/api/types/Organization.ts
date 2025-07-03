@@ -26,6 +26,8 @@ export interface Organization {
     logInWithPassword?: boolean;
     /** Whether the Organization supports "Log in with SAML". */
     logInWithSaml?: boolean;
+    /** Whether the Organization supports "Log in with OIDC". */
+    logInWithOidc?: boolean;
     /** Whether the Organization supports authenticator apps as a secondary auth factor. */
     logInWithAuthenticatorApp?: boolean;
     /** Whether the Organization supports passkeys as a secondary auth factor. */

@@ -18,6 +18,7 @@ export const Project: core.serialization.ObjectSchema<serializers.Project.Raw, T
         logInWithEmail: core.serialization.boolean().optional(),
         logInWithPassword: core.serialization.boolean().optional(),
         logInWithSaml: core.serialization.boolean().optional(),
+        logInWithOidc: core.serialization.boolean().optional(),
         logInWithAuthenticatorApp: core.serialization.boolean().optional(),
         logInWithPasskey: core.serialization.boolean().optional(),
         googleOauthClientId: core.serialization.string().optional(),
@@ -51,6 +52,7 @@ export declare namespace Project {
         logInWithEmail?: boolean | null;
         logInWithPassword?: boolean | null;
         logInWithSaml?: boolean | null;
+        logInWithOidc?: boolean | null;
         logInWithAuthenticatorApp?: boolean | null;
         logInWithPasskey?: boolean | null;
         googleOauthClientId?: string | null;

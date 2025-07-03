@@ -18,6 +18,7 @@ export const Organization: core.serialization.ObjectSchema<serializers.Organizat
         logInWithEmail: core.serialization.boolean().optional(),
         logInWithPassword: core.serialization.boolean().optional(),
         logInWithSaml: core.serialization.boolean().optional(),
+        logInWithOidc: core.serialization.boolean().optional(),
         logInWithAuthenticatorApp: core.serialization.boolean().optional(),
         logInWithPasskey: core.serialization.boolean().optional(),
         requireMfa: core.serialization.boolean().optional(),
@@ -38,6 +39,7 @@ export declare namespace Organization {
         logInWithEmail?: boolean | null;
         logInWithPassword?: boolean | null;
         logInWithSaml?: boolean | null;
+        logInWithOidc?: boolean | null;
         logInWithAuthenticatorApp?: boolean | null;
         logInWithPasskey?: boolean | null;
         requireMfa?: boolean | null;

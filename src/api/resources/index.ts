@@ -1,6 +1,7 @@
 export * as apiKeyRoleAssignments from "./apiKeyRoleAssignments";
 export * as apiKeys from "./apiKeys";
 export * as auditLogEvents from "./auditLogEvents";
+export * as oidcConnections from "./oidcConnections";
 export * as organizations from "./organizations";
 export * as passkeys from "./passkeys";
 export * as projects from "./projects";
@@ -13,6 +14,7 @@ export * as userRoleAssignments from "./userRoleAssignments";
 export * as users from "./users";
 export * from "./apiKeyRoleAssignments/client/requests";
 export * from "./apiKeys/client/requests";
+export * from "./oidcConnections/client/requests";
 export * from "./organizations/client/requests";
 export * from "./passkeys/client/requests";
 export * from "./roles/client/requests";
