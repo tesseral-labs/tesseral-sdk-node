@@ -640,6 +640,331 @@ await client.auditLogEvents.createAuditLogEvent({});
 </dl>
 </details>
 
+## OidcConnections
+
+<details><summary><code>client.oidcConnections.<a href="/src/api/resources/oidcConnections/client/Client.ts">listOidcConnections</a>({ ...params }) -> Tesseral.ListOidcConnectionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List OIDC Connections.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oidcConnections.listOidcConnections();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Tesseral.OidcConnectionsListOidcConnectionsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OidcConnections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oidcConnections.<a href="/src/api/resources/oidcConnections/client/Client.ts">createOidcConnection</a>({ ...params }) -> Tesseral.CreateOidcConnectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create an OIDC Connection.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oidcConnections.createOidcConnection({});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Tesseral.OidcConnection`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OidcConnections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oidcConnections.<a href="/src/api/resources/oidcConnections/client/Client.ts">getOidcConnection</a>(id) -> Tesseral.GetOidcConnectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get an OIDC Connection.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oidcConnections.getOidcConnection("id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` — The OIDC Connection ID.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OidcConnections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oidcConnections.<a href="/src/api/resources/oidcConnections/client/Client.ts">deleteOidcConnection</a>(id) -> Tesseral.DeleteOidcConnectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an OIDC Connection.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oidcConnections.deleteOidcConnection("id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` — The OIDC Connection ID.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OidcConnections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.oidcConnections.<a href="/src/api/resources/oidcConnections/client/Client.ts">updateOidcConnection</a>(id, { ...params }) -> Tesseral.UpdateOidcConnectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an OIDC Connection.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oidcConnections.updateOidcConnection("id", {});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` — The OIDC Connection ID.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Tesseral.OidcConnection`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OidcConnections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Organizations
 
 <details><summary><code>client.organizations.<a href="/src/api/resources/organizations/client/Client.ts">listOrganizations</a>({ ...params }) -> Tesseral.ListOrganizationsResponse</code></summary>

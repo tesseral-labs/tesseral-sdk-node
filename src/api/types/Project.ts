@@ -28,6 +28,8 @@ export interface Project {
     logInWithPassword?: boolean;
     /** Whether the Project supports "Log in with SAML". */
     logInWithSaml?: boolean;
+    /** Whether the Project supports "Log in with OIDC". */
+    logInWithOidc?: boolean;
     /** Whether the Project supports authenticator apps as a secondary auth factor. */
     logInWithAuthenticatorApp?: boolean;
     /** Whether the Project supports passkeys as a secondary auth factor. */

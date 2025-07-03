@@ -9,7 +9,7 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
-export declare namespace Users {
+export declare namespace OidcConnections {
     export interface Options {
         environment?: core.Supplier<environments.TesseralEnvironment | string>;
         /** Specify a custom URL to connect the client to. */
@@ -30,14 +30,14 @@ export declare namespace Users {
     }
 }
 
-export class Users {
-    constructor(protected readonly _options: Users.Options = {}) {}
+export class OidcConnections {
+    constructor(protected readonly _options: OidcConnections.Options = {}) {}
 
     /**
-     * List Users.
+     * List OIDC Connections.
      *
-     * @param {Tesseral.UsersListUsersRequest} request
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Tesseral.OidcConnectionsListOidcConnectionsRequest} request
+     * @param {OidcConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -45,12 +45,12 @@ export class Users {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.users.listUsers()
+     *     await client.oidcConnections.listOidcConnections()
      */
-    public async listUsers(
-        request: Tesseral.UsersListUsersRequest = {},
-        requestOptions?: Users.RequestOptions,
-    ): Promise<Tesseral.ListUsersResponse> {
+    public async listOidcConnections(
+        request: Tesseral.OidcConnectionsListOidcConnectionsRequest = {},
+        requestOptions?: OidcConnections.RequestOptions,
+    ): Promise<Tesseral.ListOidcConnectionsResponse> {
         const { organizationId, pageToken } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (organizationId != null) {
@@ -66,7 +66,7 @@ export class Users {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                "v1/users",
+                "v1/oidc-connections",
             ),
             method: "GET",
             headers: {
@@ -87,7 +87,7 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.ListUsersResponse.parseOrThrow(_response.body, {
+            return serializers.ListOidcConnectionsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -153,7 +153,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/users.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/oidc-connections.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -162,10 +162,10 @@ export class Users {
     }
 
     /**
-     * Create a User.
+     * Create an OIDC Connection.
      *
-     * @param {Tesseral.User} request
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Tesseral.OidcConnection} request
+     * @param {OidcConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -173,18 +173,18 @@ export class Users {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.users.createUser({})
+     *     await client.oidcConnections.createOidcConnection({})
      */
-    public async createUser(
-        request: Tesseral.User,
-        requestOptions?: Users.RequestOptions,
-    ): Promise<Tesseral.CreateUserResponse> {
+    public async createOidcConnection(
+        request: Tesseral.OidcConnection,
+        requestOptions?: OidcConnections.RequestOptions,
+    ): Promise<Tesseral.CreateOidcConnectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                "v1/users",
+                "v1/oidc-connections",
             ),
             method: "POST",
             headers: {
@@ -199,13 +199,13 @@ export class Users {
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.User.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.OidcConnection.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CreateUserResponse.parseOrThrow(_response.body, {
+            return serializers.CreateOidcConnectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -271,7 +271,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/users.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling POST /v1/oidc-connections.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -280,10 +280,10 @@ export class Users {
     }
 
     /**
-     * Get a User.
+     * Get an OIDC Connection.
      *
-     * @param {string} id - The User ID.
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id - The OIDC Connection ID.
+     * @param {OidcConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -291,15 +291,18 @@ export class Users {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.users.getUser("id")
+     *     await client.oidcConnections.getOidcConnection("id")
      */
-    public async getUser(id: string, requestOptions?: Users.RequestOptions): Promise<Tesseral.GetUserResponse> {
+    public async getOidcConnection(
+        id: string,
+        requestOptions?: OidcConnections.RequestOptions,
+    ): Promise<Tesseral.GetOidcConnectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                `v1/users/${encodeURIComponent(id)}`,
+                `v1/oidc-connections/${encodeURIComponent(id)}`,
             ),
             method: "GET",
             headers: {
@@ -319,7 +322,7 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.GetUserResponse.parseOrThrow(_response.body, {
+            return serializers.GetOidcConnectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -385,7 +388,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/users/{id}.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling GET /v1/oidc-connections/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -394,10 +397,10 @@ export class Users {
     }
 
     /**
-     * Delete a User.
+     * Delete an OIDC Connection.
      *
-     * @param {string} id - The User ID.
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id - The OIDC Connection ID.
+     * @param {OidcConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -405,15 +408,18 @@ export class Users {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.users.deleteUser("id")
+     *     await client.oidcConnections.deleteOidcConnection("id")
      */
-    public async deleteUser(id: string, requestOptions?: Users.RequestOptions): Promise<Tesseral.DeleteUserResponse> {
+    public async deleteOidcConnection(
+        id: string,
+        requestOptions?: OidcConnections.RequestOptions,
+    ): Promise<Tesseral.DeleteOidcConnectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                `v1/users/${encodeURIComponent(id)}`,
+                `v1/oidc-connections/${encodeURIComponent(id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -433,7 +439,7 @@ export class Users {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.DeleteUserResponse.parseOrThrow(_response.body, {
+            return serializers.DeleteOidcConnectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -499,7 +505,9 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling DELETE /v1/users/{id}.");
+                throw new errors.TesseralTimeoutError(
+                    "Timeout exceeded when calling DELETE /v1/oidc-connections/{id}.",
+                );
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,
@@ -508,11 +516,11 @@ export class Users {
     }
 
     /**
-     * Update a User.
+     * Update an OIDC Connection.
      *
-     * @param {string} id - The User ID.
-     * @param {Tesseral.User} request
-     * @param {Users.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id - The OIDC Connection ID.
+     * @param {Tesseral.OidcConnection} request
+     * @param {OidcConnections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Tesseral.BadRequestError}
      * @throws {@link Tesseral.UnauthorizedError}
@@ -520,19 +528,19 @@ export class Users {
      * @throws {@link Tesseral.NotFoundError}
      *
      * @example
-     *     await client.users.updateUser("id", {})
+     *     await client.oidcConnections.updateOidcConnection("id", {})
      */
-    public async updateUser(
+    public async updateOidcConnection(
         id: string,
-        request: Tesseral.User,
-        requestOptions?: Users.RequestOptions,
-    ): Promise<Tesseral.UpdateUserResponse> {
+        request: Tesseral.OidcConnection,
+        requestOptions?: OidcConnections.RequestOptions,
+    ): Promise<Tesseral.UpdateOidcConnectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.TesseralEnvironment.Default,
-                `v1/users/${encodeURIComponent(id)}`,
+                `v1/oidc-connections/${encodeURIComponent(id)}`,
             ),
             method: "PATCH",
             headers: {
@@ -547,13 +555,13 @@ export class Users {
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.User.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.OidcConnection.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.UpdateUserResponse.parseOrThrow(_response.body, {
+            return serializers.UpdateOidcConnectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -619,7 +627,7 @@ export class Users {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.TesseralTimeoutError("Timeout exceeded when calling PATCH /v1/users/{id}.");
+                throw new errors.TesseralTimeoutError("Timeout exceeded when calling PATCH /v1/oidc-connections/{id}.");
             case "unknown":
                 throw new errors.TesseralError({
                     message: _response.error.errorMessage,

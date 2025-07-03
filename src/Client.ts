@@ -7,6 +7,7 @@ import * as core from "./core";
 import { ApiKeyRoleAssignments } from "./api/resources/apiKeyRoleAssignments/client/Client";
 import { ApiKeys } from "./api/resources/apiKeys/client/Client";
 import { AuditLogEvents } from "./api/resources/auditLogEvents/client/Client";
+import { OidcConnections } from "./api/resources/oidcConnections/client/Client";
 import { Organizations } from "./api/resources/organizations/client/Client";
 import { Passkeys } from "./api/resources/passkeys/client/Client";
 import { Projects } from "./api/resources/projects/client/Client";
@@ -43,6 +44,7 @@ export class TesseralClient {
     protected _apiKeyRoleAssignments: ApiKeyRoleAssignments | undefined;
     protected _apiKeys: ApiKeys | undefined;
     protected _auditLogEvents: AuditLogEvents | undefined;
+    protected _oidcConnections: OidcConnections | undefined;
     protected _organizations: Organizations | undefined;
     protected _passkeys: Passkeys | undefined;
     protected _projects: Projects | undefined;
@@ -66,6 +68,10 @@ export class TesseralClient {
 
     public get auditLogEvents(): AuditLogEvents {
         return (this._auditLogEvents ??= new AuditLogEvents(this._options));
+    }
+
+    public get oidcConnections(): OidcConnections {
+        return (this._oidcConnections ??= new OidcConnections(this._options));
     }
 
     public get organizations(): Organizations {
